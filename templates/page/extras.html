@@ -1,0 +1,67 @@
+{% extends "../base.html" %}
+
+{% block title %}
+{{ page.name }}
+{% end %}
+
+{% block header %}
+{% include '../home/inside_header.html' %}
+<div style="width:100%; color:gray; text-align:center; padding: 20px 0px;">
+    <h1><span class="title-view" >{{ page.name }}</span></h1>
+    {% if is_admin %}
+    <h4><span class="keywords-view">{{ page.keywords }}</span></h4>
+    {% end %}
+</div>
+{% end %}
+
+{% block scripts %}
+
+{% if is_admin %}
+<script type="text/javascript">
+    $(document).editablepage({
+        page_name : "{{page.name}}",
+        page_keywords : "{{page.keywords}}",
+        page_uri : "{{page.uri}}",
+        body_url : site_base + "/page/{{ page.uri }}/body"
+    });
+</script>
+{% else %}
+<script type="text/javascript">
+    $(document).loadpagecontent({
+        body_url : site_base + "/page/{{ page.uri }}/body",
+        page_uri : "{{ page.uri }}"
+    });
+</script>
+{% end %}
+
+{% end %}
+
+{% block css %}
+<link type="text/css" rel='stylesheet' href="{{ site_base }}/static/css/page.edit.css" />
+{% end %}
+
+{% block body %}
+    <div id="wrap">
+        <!-- registration -->
+        <div class="container-fluid productlist">
+            <div class="row pages-caption" >
+                <div class="container-fluid-art">
+                <p>
+                {% if is_admin %}
+                <span class="editabletext" text-id="{{ site.name + page.uri }}" >{{ read_text(site.name + page.uri) }}</span>
+                {% else %}
+                {{ read_text(site.name + page.uri) }}
+                {% end %}
+                </p>
+                </div>
+            </div>
+            <!-- raw 1 -->
+            <div class="row content-body">
+            </div>
+            <div class="carritoproductos clearfix">
+                <div class="flecha clearfix">
+                </div>
+            </div>
+        </div>
+    </div>
+{% end %}

@@ -1,0 +1,68 @@
+{% extends "../base.html" %}
+
+{% block title %}
+{% end %}
+
+{% block header %}
+{% include '../home/inside_header.html' %}
+{% end %}
+
+{% block scripts %}
+{% end %}
+
+{% block css %}
+<link type="text/css" rel='stylesheet' href="{{ site_base }}/static/css/page.edit.css" />
+<style type="text/css">
+    .controls input, .controls textarea
+    {
+        padding: 10px 16px;
+    }
+
+    .col-sm-6, .col-sm-12
+    {
+        padding: 2px;
+    }
+</style>
+{% end %}
+
+
+
+{% block body %}
+    <div id="wrap">
+        <!-- registration -->
+        <div class="container-fluid productlist">
+            <div class="row pages-caption" >
+                <div class="container-fluid-art">
+                <h1>
+                {% if is_admin %}
+                <span class="editabletext" text-id="me-contact-success-title" >{{ read_text('me-contact-success-title') }}</span>
+                {% else %}
+                <span>{{ read_text('me-contact-success-title') }}</span>
+                {% end %}
+                </h1>
+                </div>
+            </div>
+
+            <div class="row pages-caption" >
+                <div class="container-fluid-art">
+                <p>
+                {% if is_admin %}
+                <span class="editabletext" text-id="me-contact-success-p" >{{ read_text('me-contact-success-p') }}</span>
+                {% else %}
+                <span>{{ read_text('me-contact-success-p') }}</span>
+                {% end %}
+                </p>
+                </div>
+            </div>
+
+            <!-- raw 1 -->
+            <div class="row content-body">
+            </div>
+            <div class="carritoproductos clearfix">
+                <div class="flecha clearfix">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% end %}

@@ -1,0 +1,101 @@
+{% extends "../base.html" %}
+{% block title %}
+    {{ site.name }}
+{% end %}
+{% block css %}
+{% end %}
+{% block scripts %}
+    <!-- archivos para galería -->
+    <script type="text/javascript" src="{{ site_base }}/static/fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('.fancybox').fancybox();
+        });
+    </script>
+    <!-- archivos para galería -->
+{% end %}
+{% block header %}
+{% include '../home/inside_header.html' %}
+{% end %}
+{% block body %}
+    <div id="wrap">
+        <!-- registration -->
+        <div class="container-fluid-art cart-list productlist">
+            <div class="row">
+                <div class="col-sm-12 blog-content">
+                    <article>
+                        <header>
+                            <h1 class="h1-art">
+                                {{ gallery.title }}
+                            </h1>
+                        </header>
+                        <!-- <div class="post-date" style="text-align:left;">
+                            25 de may 2015 
+                        </div> -->
+
+                        <div class="content articulo-text" style="text-align:left;">
+                            <div class="col-sm-12 especial">
+                                <p class="p-art">
+                                    {{ gallery.description }}
+                                </p>
+                            </div>
+                            <div class="col-sm-12 especial">
+                            <!-- html provisorio para galeria -->
+                            <ul style="list-style: none; padding: 0px; margin: 0px; float: left;">
+                                {% for i in gallery.getImageList() %}
+                                <!-- <div class="col-sm-4" style="padding: 5px !important;"> borrar clase "col-sm-4" del "a" cuando descomenten esto-->
+                                    <a class="fancybox  col-sm-4 gallery-things" data-fancybox-group="gallery" href="{{ i["thumb_500"] }}">
+                                        <!-- <div style="position: relative;"> 
+                                            <div class="show-box" style="position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3);"></div> -->
+                                             
+                                        <span class="img-span"></span>
+                                        <img class="img-gallery" src="{{ i["thumb_200"] }}" />
+                                        <!-- </div> --> 
+                                    </a>
+                                <!-- </div> -->
+                                {% end %}
+                            </ul >
+                             </div>
+                            <!-- html provisorio para galeria -->
+                            
+                            <div class="col-sm-12 especial">
+                                
+                            </div>
+
+                            <div class="col-sm-12 p-art">
+                                tags | {% for tag in gallery.tag_list %}
+                                <a>{{ tag["name"] }}</a>,
+                                {% end %}
+                                <!-- <a style="float: right;" id="show_more">Ver menos...</a> -->
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-sm-3 blog-sidebar">
+                    <div class="widget" style="text-align:left;">
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- row 4 -->
+        </div>
+        <div class="container-fluid productlist">
+            <article>
+                <header>
+                    <h1 style="text-align:left;">Contenido Relacionado</h1>
+                </header>
+            </article>
+            <div class="row cont-rel">
+                {{ content }}
+            </div>
+        </div>
+        <div class="carritoproductos clearfix">
+            <div class="flecha clearfix">
+            </div>
+        </div>
+    </div>
+
+    <!-- script para galería -->
+    
+{% end %}
