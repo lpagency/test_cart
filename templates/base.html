@@ -11,9 +11,11 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ site_base }}/static/css/style.css">
 
         <!-- autocomplete -->
-        {% block css %}{% end %}
+        {% block css %}
+        {% end %}
 
         {% include 'product/product_box.html' %}
         {% include 'product/product_home.html' %}
@@ -32,6 +34,41 @@
         <!-- body -->
         {% block body %}{% end %}
         <!-- /body -->
+
+        <div align="center">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title ">Resumen de tu compra</h4>
+                        </div>
+                        <div class="modal-body mlb-btn">
+                            <div class="container-fluid cart-list" ng-controller="">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Precio</th>
+                                                    <th>Cant</th>
+                                                    <th>Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="shopping-cart">
+                                            </tbody>
+                                        </table>
+                                        <div class="checkout-form"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- bt inicio -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -55,6 +92,91 @@
         <script type="text/javascript" src="{{ site_base }}/common/js/jquery.editable.js" ></script>
         <script type="text/javascript" src="{{ site_base }}/common/js/editabletext.js"></script>
         {% end %}
+
+        <script type="text/x-template" id="shopping-cart-product">
+            <tr>
+                <td class="vert-align text-left">{{! name }}</td>
+                <td class="text-center2 vert-align">{{! price|money }}</td>
+                <td class="vert-align fri" style="border-bottom: 1px solid #ddd;">
+                    <a href="#!" class="remove-one" lp-cart-remove-one="{{! id }}">-</a>
+                        {{! quantity }}
+                    <a href="#!" class="add-one" lp-cart-add-one="{{! id }}" >+</a>
+                </td>
+                <td class="remove-from-cart fri" lp-cart-remove="{{! id }}" aria-hidden="true"> X  </td>
+                <td class="vert-align fri">
+                    <a class="borrarproducto" cart-id="">
+                        <i class="icon-close"></i>
+                    </a>
+                </td>
+            </tr>
+        </script>
+
+        <script type="text/x-template" id="shopping-cart-total" >
+            <tr>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td id="total" colspan="3" class="text-left total-modal lib">   {{! total|money }}
+                </td>
+                <td></td>
+            </tr>
+        </script>
+
+        <script type="text/x-template" id="shopping-cart-units-total" >
+            <span> {{! units_total }}</span>
+        </script>
+
+        <script type="text/x-template" id="shopping-cart-checkout-form" >
+            <form action="{{! checkout_url}}" method="get" novalidate id="shipping-form" class="myform" onclick="return Validate()">
+                <input name="site_id" class="form-control required" type="hidden" value="69">
+                <input name="cart_id" class="form-control required" type="hidden" value="{{! cart_id}}">
+                <input name="origin" class="form-control required" type="hidden" value="{{ site.name }}">
+                <input name="total" class="total-carro" type="hidden" value="{{! total }}">
+                <div class="form-group text-center">
+                     <button type="submit" class="btn bn pagar-carro" style="background-color:rgba(0, 0, 0, 0.24);color: white;width: 31%;border-radius: 0px;height: 51px;font-weight: 100;float: right;" disabled>
+                        PAGAR
+                    </button>
+                </div>
+                <div class="">
+                    <a class="modal-close volver" data-dismiss="modal" aria-hidden="true">VOLVER</a>
+                </div>
+            </form>
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $(document).on("click", "#open-cart", function()
+                {
+                    if($(".total-carro").val() > 0)
+                    {
+                        $(".pagar-carro").attr("disabled", false);
+                    }
+                });
+
+                $(document).on("click", ".add-one", function()
+                {
+                  setTimeout(function()
+                  {
+                    if($(".total-carro").val() > 0)
+                    {
+                      $(".pagar-carro").attr("disabled", false);
+                    }
+                  },1);
+                });
+
+                $(document).on("click", ".remove-one", function()
+                {
+                  setTimeout(function()
+                  {
+                    if($(".total-carro").val() > 0)
+                    {
+                      $(".pagar-carro").attr("disabled", false);
+                    }
+                  },1);
+                });
+            });
+        </script>
 
         {% block scripts %}{% end %}
     </body>

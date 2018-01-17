@@ -58,7 +58,7 @@ $(document).ready(function()
         'products_per_page' : 9, 
         'tag': '',
         'ignore_stock': false,
-        'infinite_scroll': false,
+        'infinite_scroll': true,
         'checkout_url': checkout_url,
         'analytics' : true,
         'templateOrigin': '#product_template',

@@ -1,0 +1,15 @@
+img.lista-item-img {
+    width: 100%;
+}
+
+.volver {
+    float: left !important;
+    background: rgba(0, 0, 0, 0.24) !important;
+    /* font-size: 15px !important; */
+    padding: 15px 11px !important;
+    color: white !important;
+    font-weight: 400;
+    height: 51px;
+    width: 31%;
+    cursor: pointer;
+}

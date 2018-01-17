@@ -1,0 +1,171 @@
+{% extends "../base.html" %}
+
+{% block title %}
+{{ site.name }}
+{% end %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+{% end %}
+
+{% block header %}
+{% end %}
+
+{% block scripts %}
+
+<script type="text/javascript">
+
+  $(document).ready(function()
+  {
+
+      var base_url = $.environmentVar(
+          'https://apibodegas.loadingplay.com/',
+          'https://apibodegas.ondev.today/',
+          'https://apibodegas.loadingplay.com/');
+      var checkout_url = $.environmentVar(
+          'https://pay.loadingplay.com/',
+          'https://lpcheckout.ondev.today/',
+          'https://pay.loadingplay.com');
+      var app_public = $.environmentVar(42,42,42);
+      var site_name = $.environmentVar('bilupo', 'bilupo', 'bilupo');
+      var config = {
+          'app_public': app_public,
+          'base_url': base_url,
+          'products_per_page': 9,
+          'ignore_stock': false,
+          'infinite_scroll': true,
+          'animation': 'ghost',
+          'product_id' : {{ product_id }},
+          // 'maxProducts': 100,
+          'checkout_url': checkout_url,
+          'operator': 'or',
+          'container': '.product-detail',
+          'onLoad': function(products) {
+
+          }
+      };
+
+      $('.product-detail').ecommerce("product_detail", config);
+});
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $(document).on("click", "#open-cart", function()
+        {
+          setTimeout(function()
+          {
+            if($(".total-carro").val() > 0)
+            {
+              $(".pagar-carro").attr("disabled", false);
+            }
+          },100);
+        });
+
+        $(document).on("click", ".add-one", function()
+        {
+          setTimeout(function()
+          {
+            if($(".total-carro").val() > 0)
+            {
+              $(".pagar-carro").attr("disabled", false);
+            }
+          },1);
+        });
+
+        $(document).on("click", ".remove-one", function()
+        {
+          setTimeout(function()
+          {
+            if($(".total-carro").val() > 0)
+            {
+              $(".pagar-carro").attr("disabled", false);
+            }
+          },1);
+        });
+    });
+</script>
+
+<script type="text/template" id="product_detail">
+
+    <div class="col-md-6 col-xs-9 w3-content w3-display-container Det">
+      <img src="{{! images [0]['thumb_200'] }}" class="mySlides imagenesDetalle">
+      <img src="{{! images [1]['thumb_200'] }}" class="mySlides imagenesDetalle">
+      <img src="{{! images [2]['thumb_200'] }}" class="mySlides imagenesDetalle">
+      <img src="{{! images [3]['thumb_200'] }}" class="mySlides imagenesDetalle">
+      <img src="{{! images [4]['thumb_200'] }}" class="mySlides imagenesDetalle">
+      <div class="w3-row-padding w3-section">
+        <div class="w3-col s4">
+          <img class="demo w3-opacity w3-hover-opacity-off imagenesChicas {{! images[0]['thumb_200']|hide_if_empty }}" src="{{! images [0]['thumb_200'] }}" id="imgChica" onclick="currentDiv(1)">
+          <img class="demo w3-opacity w3-hover-opacity-off imagenesChicas {{! images[1]['thumb_200']|hide_if_empty }}" src="{{! images [1]['thumb_200'] }}" id="imgChica" onclick="currentDiv(2)">
+          <img class="demo w3-opacity w3-hover-opacity-off imagenesChicas {{! images[2]['thumb_200']|hide_if_empty }}" src="{{! images [2]['thumb_200'] }}" id="imgChica" onclick="currentDiv(3)">
+          <img class="demo w3-opacity w3-hover-opacity-off imagenesChicas {{! images[3]['thumb_200']|hide_if_empty }}" src="{{! images [3]['thumb_200'] }}" id="imgChica" onclick="currentDiv(4)">
+          <img class="demo w3-opacity w3-hover-opacity-off imagenesChicas {{! images[4]['thumb_200']|hide_if_empty }}" src="{{! images [4]['thumb_200'] }}" id="imgChica" onclick="currentDiv(5)">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xs-12 w3-desc detallesDesc">
+      <div class="alinear">
+        {{! name }}
+      </div>
+
+      <div class="alinear">
+        <h6 class="toy">
+          <b>{{! brand }}</b>
+        </h6>
+      </div>
+
+      <br>
+
+      <div class="precioDetalle">
+        <h3 class="alinear">
+          <b>{{! main_price|money }}</b>
+        </h3>
+      </div>
+
+      <br>
+
+      <button 
+        product-id="{{! id }}" 
+        product-name="{{! name }}" 
+        product-price="{{! main_price }}" 
+        product-upp="{{! upp }}" 
+        product-img="{{! images[0]['thumb_200'] }}"
+        class="add-to-cart" 
+        data-toggle="modal" 
+        data-target="#myModal" 
+        product-sku="{{! sku }}" 
+        lp-cart-add>
+          AGREGAR 
+      </button>
+
+      <div class="clearfix cu">
+        <div id="desc1" class="cont">
+          <p class="ellipsis multiline">{{! description}}</p>
+        </div>
+      </div>
+    </div>
+
+</script>
+{% end %}
+
+{% block css%}
+<link rel="stylesheet" type="text/css" href="{{ site_base }}/common/js/bower/bodegas.client/dist/bodegas.client.css">
+{% end %}
+
+{% block body %}
+{% if is_admin %}
+{% set editabletext = 'editabletext' %}
+{% else %}
+{% set editabletext = '' %}
+{% end %}
+
+<div class="contenedor" id="fondo_detalle">
+  <div class="product-detail container">
+  </div>
+</div>
+{% end %}
