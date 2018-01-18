@@ -5,7 +5,7 @@
 {% end %}
 
 {% block header %}
-<!--  header -->
+	{% include '../home/header.html' %}
 {% end %}
 
 {% block scripts %}
@@ -13,6 +13,19 @@
 {% end %}
 
 {% block body %}
+<div class="container">
+	<label>
+		INTRODUCE LA BODEGA A PROBAR:
+	</label>
+	<input type="text" name="id_bodega" class="id_bodega" placeholder="id de la bodega">
+	<br>
+	<label>
+		NOMBRE DEL SITIO:
+	</label>
+	<input type="text" name="nombre_bodega" class="nombre_bodega" placeholder="Nombre del sitio">
+	<br>
+	<input type="button" name="cambio_de_bodega" class="btn-bodega" value="Cambiar de bodega">
+</div>
 <div class="products">
 </div>
 {% end %}

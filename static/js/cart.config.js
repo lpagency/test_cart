@@ -40,6 +40,8 @@ String.prototype.replaceAll = function(search, replacement) {
 
 $(document).ready(function()
 {
+    var id_bodega = 0;
+    var nombre_bodega = "";
 
     var base_url = $.environmentVar(
         'https://apibodegas.loadingplay.com/',
@@ -70,4 +72,20 @@ $(document).ready(function()
 
     $(document).ecommerce('destroy');
     $(".products").ecommerce(config);
+
+    $(document).on("click", ".btn-bodega", function()
+    {
+        id_bodega = $(".id_bodega").val();
+        nombre_bodega = $(".nombre_bodega").val();
+
+        window.config.app_public = id_bodega;
+        window.config.site_name = nombre_bodega;
+
+        $(document).ecommerce('destroy');
+        $(".products").ecommerce(config);
+
+        $(".sitio").val(id_bodega);
+
+        console.log(config);
+    });
 });

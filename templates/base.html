@@ -128,7 +128,7 @@
 
         <script type="text/x-template" id="shopping-cart-checkout-form" >
             <form action="{{! checkout_url}}" method="get" novalidate id="shipping-form" class="myform" onclick="return Validate()">
-                <input name="site_id" class="form-control required" type="hidden" value="69">
+                <input name="site_id" class="form-control sitio required" type="hidden" value="">
                 <input name="cart_id" class="form-control required" type="hidden" value="{{! cart_id}}">
                 <input name="origin" class="form-control required" type="hidden" value="{{ site.name }}">
                 <input name="total" class="total-carro" type="hidden" value="{{! total }}">
