@@ -21,11 +21,11 @@
   {
 
       var base_url = $.environmentVar(
-          'https://apibodegas.loadingplay.com/',
+          'http://localhost:8520/',
           'https://apibodegas.ondev.today/',
           'https://apibodegas.loadingplay.com/');
       var checkout_url = $.environmentVar(
-          'https://pay.loadingplay.com/',
+          'http://localhost:8522/',
           'https://lpcheckout.ondev.today/',
           'https://pay.loadingplay.com');
       var app_public = $.environmentVar(42,42,42);
@@ -130,18 +130,18 @@
 
       <br>
 
-      <button 
-        product-id="{{! id }}" 
-        product-name="{{! name }}" 
-        product-price="{{! main_price }}" 
-        product-upp="{{! upp }}" 
+      <button
+        product-id="{{! id }}"
+        product-name="{{! name }}"
+        product-price="{{! main_price }}"
+        product-upp="{{! upp }}"
         product-img="{{! images[0]['thumb_200'] }}"
-        class="add-to-cart" 
-        data-toggle="modal" 
-        data-target="#myModal" 
-        product-sku="{{! sku }}" 
+        class="add-to-cart"
+        data-toggle="modal"
+        data-target="#myModal"
+        product-sku="{{! sku }}"
         lp-cart-add>
-          AGREGAR 
+          AGREGAR
       </button>
 
       <div class="clearfix cu">

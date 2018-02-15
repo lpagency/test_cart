@@ -44,11 +44,11 @@ $(document).ready(function()
     var nombre_bodega = "";
 
     var base_url = $.environmentVar(
-        'https://apibodegas.loadingplay.com/',
+        'http://localhost:8520/',
         'https://apibodegas.ondev.today/',
         'https://apibodegas.loadingplay.com/');
     var checkout_url = $.environmentVar(
-        'https://pay.loadingplay.com/',
+        'http://localhost:8522/',
         'https://lpcheckout.ondev.today/',
         'https://pay.loadingplay.com');
     var app_public = $.environmentVar(42,42,42);
@@ -57,14 +57,14 @@ $(document).ready(function()
     window.config = {
         'app_public': app_public,
         'base_url': base_url,
-        'products_per_page' : 9, 
+        'products_per_page' : 9,
         'tag': '',
         'ignore_stock': false,
         'infinite_scroll': true,
         'checkout_url': checkout_url,
         'analytics' : true,
         'templateOrigin': '#product_template',
-        'onLoad': function(products) 
+        'onLoad': function(products)
         {
 
         }
